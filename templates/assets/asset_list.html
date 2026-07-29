@@ -1,24 +1,53 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}
-Assets
-{% endblock %}
+{% block title %}Assets{% endblock %}
 
 {% block content %}
 
-<h2 class="mb-4">Assets</h2>
+<h1 class="mb-4">Assets</h1>
 
-<table class="table table-bordered table-hover">
+<div class="d-flex justify-content-between mb-3">
+
+    <form method="GET" class="d-flex">
+
+        <input
+            type="text"
+            name="q"
+            class="form-control me-2"
+            placeholder="Search Asset..."
+            value="{{ query|default:'' }}">
+
+        <button class="btn btn-primary">
+            Search
+        </button>
+
+    </form>
+
+    <a href="{% url 'asset_create' %}"
+       class="btn btn-success">
+
+        + Add Asset
+
+    </a>
+
+</div>
+
+<table class="table table-bordered table-hover align-middle">
 
     <thead class="table-dark">
+
         <tr>
-            <th>Asset Code</th>
-            <th>Name</th>
+
+            <th>Code</th>
+            <th>Asset</th>
             <th>Category</th>
             <th>Brand</th>
-            <th>Vendor</th>
             <th>Status</th>
+            <th>Warranty</th>
+            <th width="170">Actions</th>
+
         </tr>
+
     </thead>
 
     <tbody>
@@ -29,15 +58,81 @@ Assets
 
             <td>{{ asset.asset_code }}</td>
 
-            <td>{{ asset.asset_name }}</td>
+            <td>
+
+                <strong>{{ asset.asset_name }}</strong><br>
+
+                <small>{{ asset.model }}</small>
+
+            </td>
 
             <td>{{ asset.category }}</td>
 
             <td>{{ asset.brand }}</td>
 
-            <td>{{ asset.vendor }}</td>
+            <td>
 
-            <td>{{ asset.current_status }}</td>
+                {% if asset.current_status == "Available" %}
+
+                    <span class="badge bg-success">
+                        Available
+                    </span>
+
+                {% elif asset.current_status == "Assigned" %}
+
+                    <span class="badge bg-warning text-dark">
+                        Assigned
+                    </span>
+
+                {% elif asset.current_status == "Under Maintenance" %}
+
+                    <span class="badge bg-info text-dark">
+                        Maintenance
+                    </span>
+
+                {% elif asset.current_status == "Lost" %}
+
+                    <span class="badge bg-danger">
+                        Lost
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-secondary">
+                        {{ asset.current_status }}
+                    </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {{ asset.warranty_expiry }}
+
+            </td>
+
+            <td>
+
+                <div class="btn-group">
+
+                    <a href="{% url 'asset_update' asset.id %}"
+                       class="btn btn-warning btn-sm">
+
+                        Edit
+
+                    </a>
+
+                    <a href="{% url 'asset_delete' asset.id %}"
+                       class="btn btn-danger btn-sm">
+
+                        Delete
+
+                    </a>
+
+                </div>
+
+            </td>
 
         </tr>
 
@@ -45,8 +140,10 @@ Assets
 
         <tr>
 
-            <td colspan="6" class="text-center">
+            <td colspan="7" class="text-center">
+
                 No Assets Found
+
             </td>
 
         </tr>
