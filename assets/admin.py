@@ -1,5 +1,12 @@
 from django.contrib import admin
-from .models import AssetCategory, Brand, Vendor, Asset, AssetAssignment
+from .models import (
+    AssetCategory,
+    Brand,
+    Vendor,
+    Asset,
+    AssetAssignment,
+    AssetAuditLog,
+)
 
 admin.site.register(AssetCategory)
 admin.site.register(Brand)
@@ -43,4 +50,20 @@ class AssetAssignmentAdmin(admin.ModelAdmin):
     search_fields = (
         'asset__asset_code',
         'employee__employee_code',
+    )
+@admin.register(AssetAuditLog)
+class AssetAuditLogAdmin(admin.ModelAdmin):
+    list_display = (
+        "asset",
+        "action",
+        "performed_by",
+        "created_at",
+    )
+
+    list_filter = (
+        "action",
+    )
+
+    search_fields = (
+        "asset__asset_code",
     )
