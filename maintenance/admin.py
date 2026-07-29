@@ -19,3 +19,16 @@ class MaintenanceRecordAdmin(admin.ModelAdmin):
     search_fields = (
         "asset__asset_code",
     )
+
+
+    def save(self, *args, **kwargs):
+
+        if self.maintenance_status in ["Pending", "In Progress"]:
+            self.asset.current_status = "Under Maintenance"
+
+        elif self.maintenance_status == "Completed":
+            self.asset.current_status = "Available"
+
+        self.asset.save()
+
+        super().save(*args, **kwargs)
