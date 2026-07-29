@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">
+
+Dashboard
+
+</h2>
+
+<div class="row">
+
+<div class="col-md-3">
+
+<div class="card bg-primary text-white mb-3">
+
+<div class="card-body">
+
+<h5>Total Assets</h5>
+
+<h2>{{ total_assets }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card bg-success text-white mb-3">
+
+<div class="card-body">
+
+<h5>Available</h5>
+
+<h2>{{ available_assets }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card bg-warning text-dark mb-3">
+
+<div class="card-body">
+
+<h5>Assigned</h5>
+
+<h2>{{ assigned_assets }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card bg-danger text-white mb-3">
+
+<div class="card-body">
+
+<h5>Maintenance</h5>
+
+<h2>{{ maintenance_assets }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-4">
+
+<div class="card">
+
+<div class="card-body">
+
+<h5>Total Employees</h5>
+
+<h2>{{ total_employees }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card">
+
+<div class="card-body">
+
+<h5>Pending Requests</h5>
+
+<h2>{{ pending_requests }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card">
+
+<div class="card-body">
+
+<h5>Total Maintenance</h5>
+
+<h2>{{ total_maintenance }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}
