@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+import csv
+from django.http import HttpResponse
 from assets.models import Asset
 from employees.models import Employee
 from maintenance.models import MaintenanceRecord
@@ -69,3 +71,36 @@ def reports_dashboard(request):
         "reports/report_dashboard.html",
         context,
     )
+
+@login_required
+@admin_required
+def export_assets_csv(request):
+
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = 'attachment; filename="assets_report.csv"'
+
+    writer = csv.writer(response)
+
+    writer.writerow([
+        "Asset Code",
+        "Asset Name",
+        "Category",
+        "Brand",
+        "Status",
+        "Purchase Cost",
+    ])
+
+    assets = Asset.objects.all()
+
+    for asset in assets:
+
+        writer.writerow([
+            asset.asset_code,
+            asset.asset_name,
+            asset.category,
+            asset.brand,
+            asset.current_status,
+            asset.purchase_cost,
+        ])
+
+    return response
