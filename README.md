@@ -1,31 +1,30 @@
 # Corporate Asset Management System
 
-A web-based Corporate Asset Management System built with Django.
+A web-based Corporate Asset Management System developed using Django. This system helps organizations manage company assets, employees, maintenance records, asset assignments, and employee requests.
+
+---
 
 ## Features
 
-- User Authentication
-- Role Based Access Control
+- User Authentication (Login & Logout)
+- Role-Based Access Control
 - Dashboard
 - Employee Management
-- Department Management
-- Designation Management
+- Department & Designation Management
 - Asset Management
-- Asset Assignment
-- Asset Return
+- Asset Assignment & Return
 - Maintenance Management
 - Employee Asset Requests
 - Reports Dashboard
 - CSV Export
-- Search
-- Status Badges
+- Search Functionality
 - Bootstrap Responsive UI
 
 ---
 
 ## Technology Stack
 
-- Python 3.14
+- Python 3
 - Django 6
 - SQLite3
 - Bootstrap 5
@@ -34,21 +33,89 @@ A web-based Corporate Asset Management System built with Django.
 
 ---
 
-## User Roles
+## Project Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Fatema-Keya/CorporateAssetManagementSystem.git
+```
+
+### 2. Go to the Project Directory
+
+```bash
+cd CorporateAssetManagementSystem
+```
+
+### 3. Create a Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### 4. Activate the Virtual Environment
+
+**Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+**Linux / macOS**
+
+```bash
+source venv/bin/activate
+```
+
+### 5. Install Required Packages
+
+```bash
+pip install -r requirements.txt
+```
+
+### 6. Apply Database Migrations
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+### 7. Create Superuser
+
+```bash
+python manage.py createsuperuser
+```
+
+### 8. Run the Development Server
+
+```bash
+python manage.py runserver
+```
+
+Now open:
+
+```
+http://127.0.0.1:8000/
+```
+
+---
+
+## Default User Roles
 
 ### Administrator
 
-- Full Access
+- Full System Access
 - Reports
 - User Management
-- System Management
+- Maintenance
+- Asset Management
 
 ### Staff
 
-- Employees
-- Assets
-- Assignments
+- Employee Management
+- Asset Management
 - Maintenance
+- Employee Requests
 
 ### Employee
 
@@ -57,66 +124,12 @@ A web-based Corporate Asset Management System built with Django.
 
 ---
 
-## Installation
-
-Clone Repository
-
-```bash
-git clone https://github.com/Fatema-Keya/CorporateAssetManagementSystem.git
-```
-
-Go to Project
-
-```bash
-cd CorporateAssetManagementSystem
-```
-
-Create Virtual Environment
-
-```bash
-python -m venv venv
-```
-
-Activate
-
-Windows
-
-```bash
-venv\Scripts\activate
-```
-
-Install Requirements
-
-```bash
-pip install -r requirements.txt
-```
-
-Run Migrations
-
-```bash
-python manage.py migrate
-```
-
-Create Superuser
-
-```bash
-python manage.py createsuperuser
-```
-
-Run Server
-
-```bash
-python manage.py runserver
-```
-
----
-
 ## Project Structure
 
 ```
 accounts/
-employees/
 assets/
+employees/
 maintenance/
 requests_app/
 reports/
@@ -129,20 +142,8 @@ config/
 
 ---
 
-## Screenshots
-
-- Login
-- Dashboard
-- Employee Management
-- Asset Management
-- Reports Dashboard
-
-(Add screenshots later)
-
----
-
 ## Author
 
-Fatema Akter Keya
+**Fatema Akter Keya**
 
 Junior Django Developer
