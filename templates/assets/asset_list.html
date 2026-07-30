@@ -4,48 +4,47 @@
 
 {% block content %}
 
-<h1 class="mb-4">Assets</h1>
+<h2 class="mb-4">Assets</h2>
 
-<div class="d-flex justify-content-between mb-3">
+<div class="d-flex justify-content-between align-items-center mb-3">
 
-    <form method="GET" class="d-flex">
+    <form method="GET" class="d-flex" style="width: 400px;">
 
         <input
             type="text"
             name="q"
             class="form-control me-2"
-            placeholder="Search Asset..."
+            placeholder="Search by Name, Code or Serial Number"
             value="{{ query|default:'' }}">
 
-        <button class="btn btn-primary">
+        <button class="btn btn-primary me-2">
             Search
         </button>
 
+        <a href="{% url 'asset_list' %}" class="btn btn-secondary">
+            Reset
+        </a>
+
     </form>
 
-    <a href="{% url 'asset_create' %}"
-       class="btn btn-success">
-
+    <a href="{% url 'asset_create' %}" class="btn btn-success">
         + Add Asset
-
     </a>
 
 </div>
 
-<table class="table table-bordered table-hover align-middle">
+<table class="table table-bordered table-hover">
 
     <thead class="table-dark">
 
         <tr>
-
             <th>Code</th>
             <th>Asset</th>
             <th>Category</th>
             <th>Brand</th>
             <th>Status</th>
             <th>Warranty</th>
-            <th width="170">Actions</th>
-
+            <th width="170">Action</th>
         </tr>
 
     </thead>
@@ -54,99 +53,73 @@
 
     {% for asset in assets %}
 
-        <tr>
+    <tr>
 
-            <td>{{ asset.asset_code }}</td>
+        <td>{{ asset.asset_code }}</td>
 
-            <td>
+        <td>
+            <strong>{{ asset.asset_name }}</strong><br>
+            <small>{{ asset.model }}</small>
+        </td>
 
-                <strong>{{ asset.asset_name }}</strong><br>
+        <td>{{ asset.category }}</td>
 
-                <small>{{ asset.model }}</small>
+        <td>{{ asset.brand }}</td>
 
-            </td>
+        <td>
 
-            <td>{{ asset.category }}</td>
+            {% if asset.current_status == "Available" %}
+                <span class="badge bg-success">Available</span>
 
-            <td>{{ asset.brand }}</td>
+            {% elif asset.current_status == "Assigned" %}
+                <span class="badge bg-primary">Assigned</span>
 
-            <td>
+            {% elif asset.current_status == "Under Maintenance" %}
+                <span class="badge bg-warning text-dark">Under Maintenance</span>
 
-                {% if asset.current_status == "Available" %}
+            {% elif asset.current_status == "Lost" %}
+                <span class="badge bg-danger">Lost</span>
 
-                    <span class="badge bg-success">
-                        Available
-                    </span>
+            {% elif asset.current_status == "Damaged" %}
+                <span class="badge bg-secondary">Damaged</span>
 
-                {% elif asset.current_status == "Assigned" %}
+            {% else %}
+                <span class="badge bg-dark">
+                    {{ asset.current_status }}
+                </span>
+            {% endif %}
 
-                    <span class="badge bg-warning text-dark">
-                        Assigned
-                    </span>
+        </td>
 
-                {% elif asset.current_status == "Under Maintenance" %}
+        <td>{{ asset.warranty_expiry }}</td>
 
-                    <span class="badge bg-info text-dark">
-                        Maintenance
-                    </span>
+        <td>
 
-                {% elif asset.current_status == "Lost" %}
+            <a href="{% url 'asset_update' asset.id %}"
+               class="btn btn-warning btn-sm">
+                Edit
+            </a>
 
-                    <span class="badge bg-danger">
-                        Lost
-                    </span>
+            <a href="{% url 'asset_delete' asset.id %}"
+               class="btn btn-danger btn-sm">
+                Delete
+            </a>
 
-                {% else %}
+        </td>
 
-                    <span class="badge bg-secondary">
-                        {{ asset.current_status }}
-                    </span>
-
-                {% endif %}
-
-            </td>
-
-            <td>
-
-                {{ asset.warranty_expiry }}
-
-            </td>
-
-            <td>
-
-                <div class="btn-group">
-
-                    <a href="{% url 'asset_update' asset.id %}"
-                       class="btn btn-warning btn-sm">
-
-                        Edit
-
-                    </a>
-
-                    <a href="{% url 'asset_delete' asset.id %}"
-                       class="btn btn-danger btn-sm">
-
-                        Delete
-
-                    </a>
-
-                </div>
-
-            </td>
-
-        </tr>
+    </tr>
 
     {% empty %}
 
-        <tr>
+    <tr>
 
-            <td colspan="7" class="text-center">
+        <td colspan="7" class="text-center">
 
-                No Assets Found
+            No Assets Found
 
-            </td>
+        </td>
 
-        </tr>
+    </tr>
 
     {% endfor %}
 

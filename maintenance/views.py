@@ -4,6 +4,7 @@ from django.contrib import messages
 from .models import MaintenanceRecord
 from .forms import MaintenanceForm
 from django.contrib.auth.decorators import login_required
+from utils.decorators import staff_required
 
 @login_required
 def maintenance_list(request):
@@ -23,6 +24,7 @@ def maintenance_list(request):
     )
 
 @login_required
+@staff_required
 def maintenance_create(request):
 
     if request.method == "POST":
@@ -54,6 +56,7 @@ def maintenance_create(request):
     )
 
 @login_required
+@staff_required
 def maintenance_update(request, pk):
 
     record = get_object_or_404(
@@ -93,6 +96,7 @@ def maintenance_update(request, pk):
     )
 
 @login_required
+@staff_required
 def maintenance_delete(request, pk):
 
     record = get_object_or_404(

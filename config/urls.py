@@ -5,6 +5,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 
     # Dashboard
+    path("", include("accounts.urls")),
     path("", include("dashboard.urls")),
 
     # Employees

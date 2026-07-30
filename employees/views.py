@@ -4,6 +4,7 @@ from django.contrib import messages
 from .models import Employee
 from .forms import EmployeeForm
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 @login_required
 def employee_list(request):
@@ -28,7 +29,12 @@ def employee_list(request):
         "employees": employees,
         "query": query,
     }
+    paginator = Paginator(employees, 10)
 
+    page_number = request.GET.get("page")
+
+    employees = paginator.get_page(page_number)
+    
     return render(
         request,
         "employees/employee_list.html",
@@ -120,3 +126,4 @@ def employee_delete(request, pk):
             "employee": employee,
         },
     )
+

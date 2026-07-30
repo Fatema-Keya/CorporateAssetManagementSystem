@@ -33,7 +33,35 @@
 
             <td>{{ record.vendor }}</td>
 
-            <td>{{ record.maintenance_status }}</td>
+            <td>
+
+    {% if record.maintenance_status == "Pending" %}
+
+        <span class="badge bg-warning text-dark">
+            Pending
+        </span>
+
+    {% elif record.maintenance_status == "In Progress" %}
+
+        <span class="badge bg-primary">
+            In Progress
+        </span>
+
+    {% elif record.maintenance_status == "Completed" %}
+
+        <span class="badge bg-success">
+            Completed
+        </span>
+
+    {% else %}
+
+        <span class="badge bg-secondary">
+            {{ record.maintenance_status }}
+        </span>
+
+    {% endif %}
+
+</td>
 
             <td>{{ record.maintenance_cost }}</td>
 

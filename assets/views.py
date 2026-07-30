@@ -6,12 +6,14 @@ from django.contrib import messages
 from .models import Asset, AssetAssignment
 from .forms import AssetForm, AssetAssignmentForm
 from django.contrib.auth.decorators import login_required
+from utils.decorators import staff_required
 
 
 # ==========================
 # Asset CRUD
 # ==========================
 @login_required
+@staff_required
 def asset_list(request):
 
     query = request.GET.get("q")
@@ -35,6 +37,7 @@ def asset_list(request):
     )
 
 @login_required
+@staff_required
 def asset_create(request):
 
     if request.method == "POST":
@@ -58,6 +61,7 @@ def asset_create(request):
     )
 
 @login_required
+@staff_required
 def asset_update(request, pk):
 
     asset = get_object_or_404(Asset, pk=pk)
@@ -86,6 +90,7 @@ def asset_update(request, pk):
     )
 
 @login_required
+@staff_required
 def asset_delete(request, pk):
 
     asset = get_object_or_404(Asset, pk=pk)
@@ -108,6 +113,7 @@ def asset_delete(request, pk):
 # Asset Assignment
 # ==========================
 @login_required
+@staff_required
 def assignment_list(request):
 
     assignments = AssetAssignment.objects.select_related(
@@ -125,6 +131,7 @@ def assignment_list(request):
     )
 
 @login_required
+@staff_required
 def assignment_create(request):
 
     if request.method == "POST":
@@ -154,6 +161,7 @@ def assignment_create(request):
     )
 
 @login_required
+@staff_required
 def assignment_return(request, pk):
 
     assignment = get_object_or_404(

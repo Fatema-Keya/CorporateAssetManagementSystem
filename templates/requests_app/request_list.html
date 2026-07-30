@@ -36,7 +36,31 @@
 
             <td>{{ request.asset_category }}</td>
 
-            <td>{{ request.status }}</td>
+            <td>{% if request.status == "Pending" %}
+
+<span class="badge bg-warning text-dark">
+Pending
+</span>
+
+{% elif request.status == "Approved" %}
+
+<span class="badge bg-success">
+Approved
+</span>
+
+{% elif request.status == "Rejected" %}
+
+<span class="badge bg-danger">
+Rejected
+</span>
+
+{% else %}
+
+<span class="badge bg-primary">
+Completed
+</span>
+
+{% endif %}</td>
 
             <td>
 
