@@ -3,8 +3,9 @@ from assets.models import Asset, AssetAssignment
 from employees.models import Employee
 from maintenance.models import MaintenanceRecord
 from requests_app.models import EmployeeRequest
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def dashboard(request):
 
     context = {

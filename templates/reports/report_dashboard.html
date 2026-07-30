@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Reports Dashboard{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Reports Dashboard</h2>
+
+<div class="row">
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-primary">
+            <div class="card-body">
+                <h5>Total Assets</h5>
+                <h2>{{ total_assets }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-success">
+            <div class="card-body">
+                <h5>Available Assets</h5>
+                <h2>{{ available_assets }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-warning">
+            <div class="card-body">
+                <h5>Assigned Assets</h5>
+                <h2>{{ assigned_assets }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card text-bg-danger">
+            <div class="card-body">
+                <h5>Maintenance</h5>
+                <h2>{{ maintenance_assets }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                Employees
+            </div>
+            <div class="card-body">
+                <p>Total : <strong>{{ total_employees }}</strong></p>
+                <p>Active : <strong>{{ active_employees }}</strong></p>
+                <p>Inactive : <strong>{{ inactive_employees }}</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                Maintenance
+            </div>
+            <div class="card-body">
+                <p>Total : <strong>{{ total_maintenance }}</strong></p>
+                <p>Pending : <strong>{{ pending_maintenance }}</strong></p>
+                <p>Completed : <strong>{{ completed_maintenance }}</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                Requests
+            </div>
+            <div class="card-body">
+                <p>Pending : <strong>{{ pending_requests }}</strong></p>
+                <p>Approved : <strong>{{ approved_requests }}</strong></p>
+                <p>Rejected : <strong>{{ rejected_requests }}</strong></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

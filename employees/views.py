@@ -3,8 +3,9 @@ from django.contrib import messages
 
 from .models import Employee
 from .forms import EmployeeForm
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def employee_list(request):
     query = request.GET.get("q")
 
@@ -34,7 +35,7 @@ def employee_list(request):
         context,
     )
 
-
+@login_required
 def employee_create(request):
 
     if request.method == "POST":
@@ -63,7 +64,7 @@ def employee_create(request):
         },
     )
 
-
+@login_required
 def employee_update(request, pk):
 
     employee = get_object_or_404(Employee, pk=pk)
@@ -97,7 +98,7 @@ def employee_update(request, pk):
         },
     )
 
-
+@login_required
 def employee_delete(request, pk):
 
     employee = get_object_or_404(Employee, pk=pk)

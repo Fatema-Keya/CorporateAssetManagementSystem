@@ -56,3 +56,14 @@ class MaintenanceRecord(models.Model):
 
     def __str__(self):
         return f"{self.asset.asset_code} - {self.maintenance_status}"
+
+    def save(self, *args, **kwargs):
+
+        if self.maintenance_status == "Completed":
+            self.asset.current_status = "Available"
+        else:
+            self.asset.current_status = "Under Maintenance"
+
+        self.asset.save()
+
+        super().save(*args, **kwargs)

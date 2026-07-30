@@ -209,6 +209,16 @@ class AssetAssignment(models.Model):
 
         super().save(*args, **kwargs)
 
+        def return_asset(self):
+
+            self.status = "Returned"
+
+            self.asset.current_status = "Available"
+
+            self.asset.save()
+
+            self.save()
+
 class AssetAuditLog(models.Model):
 
     asset = models.ForeignKey(
@@ -229,3 +239,6 @@ class AssetAuditLog(models.Model):
 
     def __str__(self):
         return f"{self.asset.asset_code} - {self.action}"
+
+
+    

@@ -4,10 +4,12 @@ from .models import EmployeeRequest
 
 @admin.register(EmployeeRequest)
 class EmployeeRequestAdmin(admin.ModelAdmin):
+
     list_display = (
         "employee",
         "request_type",
         "status",
+        "approved_by",
         "created_at",
     )
 
@@ -18,4 +20,5 @@ class EmployeeRequestAdmin(admin.ModelAdmin):
 
     search_fields = (
         "employee__employee_code",
+        "description",
     )

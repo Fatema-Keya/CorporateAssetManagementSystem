@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Maintenance{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-3">Maintenance Records</h2>
+
+<a href="{% url 'maintenance_create' %}" class="btn btn-primary mb-3">
+    + Add Maintenance
+</a>
+
+<table class="table table-bordered table-striped">
+
+    <thead class="table-dark">
+        <tr>
+            <th>Asset</th>
+            <th>Vendor</th>
+            <th>Status</th>
+            <th>Cost</th>
+            <th>Start Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for record in records %}
+
+        <tr>
+
+            <td>{{ record.asset }}</td>
+
+            <td>{{ record.vendor }}</td>
+
+            <td>{{ record.maintenance_status }}</td>
+
+            <td>{{ record.maintenance_cost }}</td>
+
+            <td>{{ record.start_date }}</td>
+
+            <td>
+
+                <a href="{% url 'maintenance_update' record.id %}" class="btn btn-warning btn-sm">
+                    Edit
+                </a>
+
+                <a href="{% url 'maintenance_delete' record.id %}" class="btn btn-danger btn-sm">
+                    Delete
+                </a>
+
+            </td>
+
+        </tr>
+
+    {% empty %}
+
+        <tr>
+            <td colspan="6" class="text-center">
+                No maintenance records found.
+            </td>
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}
