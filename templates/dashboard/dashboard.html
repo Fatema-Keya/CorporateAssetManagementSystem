@@ -132,4 +132,87 @@ Dashboard
 
 </div>
 
+<hr class="my-4">
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h5>Asset Status Overview</h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <canvas id="assetChart"></canvas>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const ctx = document.getElementById('assetChart');
+
+new Chart(ctx, {
+
+    type: 'bar',
+
+    data: {
+
+        labels: [
+
+            'Available',
+
+            'Assigned',
+
+            'Maintenance',
+
+            'Lost'
+
+        ],
+
+        datasets: [{
+
+            label: 'Assets',
+
+            data: [
+
+                {{ available }},
+
+                {{ assigned }},
+
+                {{ maintenance }},
+
+                {{ lost }}
+
+            ]
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+
+                display: false
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
 {% endblock %}
+

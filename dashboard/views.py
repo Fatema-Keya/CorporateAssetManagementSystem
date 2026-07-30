@@ -17,6 +17,11 @@ def dashboard(request):
         "total_employees": Employee.objects.count(),
         "pending_requests": EmployeeRequest.objects.filter(status="Pending").count(),
         "total_maintenance": MaintenanceRecord.objects.count(),
+
+        "available": Asset.objects.filter(current_status="Available").count(),
+        "assigned": Asset.objects.filter(current_status="Assigned").count(),
+        "maintenance": Asset.objects.filter(current_status="Under Maintenance").count(),
+        "lost": Asset.objects.filter(current_status="Lost").count(),
     }
 
     return render(request, "dashboard/dashboard.html", context)
